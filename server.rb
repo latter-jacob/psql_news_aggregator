@@ -19,7 +19,12 @@ end
 post "/posts" do
 
   db_connection do |conn|
-    conn.exec_params("INSERT INTO info (name, url, description) VALUES ($1, $2, $3)", [params["name"], params["url"], params["description"] ])
+    list = conn.exec_params("SELECT url from info")
+    if list.values.flatten.include?(params["url"])
+      break
+    else
+      conn.exec_params("INSERT INTO info (name, url, description) VALUES ($1, $2, $3)", [params["name"], params["url"], params["description"] ])
+    end
   end
 
   redirect "/articles/new"
