@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Slack</title>
+  </head>
+
+  <body>
+    <h2>Check out Some News</h2>
+    <h3>Sites</h3>
+
+    <ul>
+      <% info.each do |post| %>
+        <li><a href=<%= post["url"] %>> <%= post["name"] %></a> - <%= post["description"]%></li>
+      <% end %>
+    </ul>
+
+    <form action="/posts" method="post">
+
+        <label for="name">name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url" required>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
+
+        <input type="submit", value="Post!">
+    </form>
+  </body>
+</html>
